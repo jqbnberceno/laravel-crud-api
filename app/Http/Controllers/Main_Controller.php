@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\CRUD_Service;
 use Illuminate\Http\Request;
 use App\Models\Data;
+use Illuminate\Validation\ValidationException;
 
 
 class Main_Controller extends Controller
 {
+    private $crudService;
  
+    public function __construct(CRUD_Service $crudService)
+    {
+        $this->crudService = $crudService;
+    }
  //retrieves all data
     public function retrieve()
     {
-        $data = Data::all();
+        $data = $this->crudService->retrieve();
+        
         return response()->json($data, 200);
     }
 
@@ -20,46 +28,55 @@ class Main_Controller extends Controller
 
     public function insert(Request $request)
     {
-
-        $request->validate ([
-            'name' => 'required|string|max:30',
-            'age' => 'required|int|min:0',
-            'gender' => 'required|string|max:10'
+        try{
+        $validatedData = $request->validate ([
+            'name' => 'required|string|max:30|min:3',
+            'age' => 'required|int|min:1',
+            'gender' => 'required|string|max:10|min:4'
         ]);
-
-        $data = Data::create([
-            'name' => $request->name,
-            'age'  => $request->age,
-            'gender' => $request->gender
-        ]);
-
-        return response()->json($data, 200);
-
+        } catch (ValidationException $e){
+            return response()->json([
+                'message' =>$e->errors(),
+                'status' => 422,
+            ],422);
+        }
+        
+        $this->crudService->insert($validatedData);
+        
+        return response()->json(['message' => 'Successfully Inserted'], 200);
+        
     }
 
     //update a data
 
     public function update(Request $request, $id)
     {
-        $data = Data::find($id);
+        try{
+            $validatedData = $request->validate ([
+                'name' => 'required|string|max:30|min:3',
+                'age' => 'required|int|min:1',
+                'gender' => 'required|string|max:10|min:4'
+            ]);
+            } catch (ValidationException $e){
+                return response()->json([
+                    'message' =>$e->errors(),
+                    'status' => 422,
+                ],422);
+            }
+            
+            $this->crudService->update($validatedData, $id);
 
-        $request->validate ([
-            'name' => 'required|string|max:30',
-            'age' => 'required|int|min:0',
-            'gender' => 'required|string|max:10'
-        ]);
-
-        $data->update($request->all());
-
-        return response()->json($data, 200);
+            return response()->json(['message' => 'Successfully Updated'], 200);
 
     }
 
     public function destroy(Request $request, $id)
     {
-        $data = Data::find($id);
 
-        $data->delete();
+        $this->crudService->destroy($id);
+
+        return response()->json(['message' => 'Successfully Deleted'], 200);
+
     }
 
 }
