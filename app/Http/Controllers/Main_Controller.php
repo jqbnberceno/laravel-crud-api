@@ -73,7 +73,11 @@ class Main_Controller extends Controller
     public function destroy(Request $request, $id)
     {
 
-        $this->crudService->destroy($id);
+        $result = $this->crudService->destroy($id);
+
+        if (!$result) {
+            return response()->json(['error' => 'Data not found'], 404);
+        }
 
         return response()->json(['message' => 'Successfully Deleted'], 200);
 
