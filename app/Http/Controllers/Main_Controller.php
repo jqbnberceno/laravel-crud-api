@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Services\CRUD_Service;
 use Illuminate\Http\Request;
-use App\Models\Data;
 use Illuminate\Validation\ValidationException;
 
 
 class Main_Controller extends Controller
 {
     private $crudService;
- 
+
     public function __construct(CRUD_Service $crudService)
     {
         $this->crudService = $crudService;

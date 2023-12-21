@@ -2,15 +2,13 @@
 
 namespace App\Services;
 
-use App\Repositories\CRUD_Repository;
-use Illuminate\Http\Request;
-
+use App\Repositories\Interfaces\CRUD_Interface;
 
 class CRUD_Service
 {    
     protected $crudRepository;
 
-    public function __construct(CRUD_Repository $crudRepository)
+    public function __construct(CRUD_Interface $crudRepository)
     {
         $this->crudRepository = $crudRepository;
     }
@@ -23,7 +21,7 @@ class CRUD_Service
 
     public function insert(array $validatedData){
 
-        return $this->crudRepository->insert($validatedData);
+        return $this->crudRepository->create($validatedData);
 
     }
 
