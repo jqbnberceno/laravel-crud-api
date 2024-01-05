@@ -12,8 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'http://localhost/crud-api/public/insert-data',
-        'http://localhost/crud-api/public/update-data/*',
-        'http://localhost/crud-api/public/delete-data/*'
+        'http://crud-api.test/insert-data',
+        'http://crud-api.test/update-data/*',
+        'http://crud-api.test/delete-data/*'
     ];
 }

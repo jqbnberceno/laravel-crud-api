@@ -1,0 +1,300 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CRUD-API OpenApi",
+        "description": "CRUD-API Project OpenApi description",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/retrieve-data": {
+            "get": {
+                "tags": [
+                    "CRUD Operations"
+                ],
+                "summary": "Retrieve All User Data",
+                "description": "Retrieve all the data from the system",
+                "operationId": "855f8122faef56945d4b6218c81e557d",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/insert-data": {
+            "post": {
+                "tags": [
+                    "CRUD Operations"
+                ],
+                "summary": "Insert new data",
+                "description": "Inserts new data into the system",
+                "operationId": "8a33ce3d6da68ff66add5fbb873c154c",
+                "requestBody": {
+                    "description": "Pass required parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tenant_id": {
+                                        "description": "ID of the tenant",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 30,
+                                        "minLength": 3,
+                                        "example": "Juaquin"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": 21
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "maxLength": 10,
+                                        "minLength": 4,
+                                        "example": "Male"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/update-data/{id}": {
+            "put": {
+                "tags": [
+                    "CRUD Operations"
+                ],
+                "summary": "Update data",
+                "description": "Update data in the system by ID",
+                "operationId": "ae2871c105156457501e3ef824549a20",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the data to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass required parameters",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tenant_id": {
+                                        "description": "ID of the tenant",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 30,
+                                        "minLength": 3,
+                                        "example": "Juaquin"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": 21
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "maxLength": 10,
+                                        "minLength": 4,
+                                        "example": "Male"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "description": "Validation errors",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/search-data/{id}": {
+            "get": {
+                "tags": [
+                    "CRUD Operations"
+                ],
+                "summary": "Search data by ID",
+                "description": "Search for specific data in the system by ID",
+                "operationId": "eb609c7856e2272ae36969d8e8ed758f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the data to search",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Data not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/delete-data/{id}": {
+            "delete": {
+                "tags": [
+                    "CRUD Operations"
+                ],
+                "summary": "Delete data by ID",
+                "description": "Delete for the specific data in the system by ID",
+                "operationId": "324403c5b02122c4ad0bfcc9fe3f998d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the data to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Data not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Data not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "CRUD API",
+            "description": "Rest API documentation"
+        }
+    ]
+}

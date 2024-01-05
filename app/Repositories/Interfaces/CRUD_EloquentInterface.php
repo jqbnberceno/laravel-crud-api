@@ -29,5 +29,12 @@ interface CRUD_EloquentInterface
      * @param int $id
      * @return Model|null
      */
+
+     public function search(int $id);
+
+    /**
+     * @param int $id
+     * @return Model|null
+     */
     public function destroy(int $id);
 }

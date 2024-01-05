@@ -12,7 +12,7 @@ class Data extends Model
 
     protected $primarykey = 'id';
     protected $fillable = [
-        'name' , 'age', 'gender', 'created_at', 'updated_at'
+        'tenant_id', 'name' , 'age', 'gender', 'created_at', 'updated_at'
     ];
 
 }

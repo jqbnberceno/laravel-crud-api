@@ -21,23 +21,32 @@ Route::get('/', function () {
 
 });
 
-//crud routes
 
-// read all data
+// retrieve data
 
-Route::get('/retrieve-data', [Main_Controller::class,'retrieve']);
+Route::get('/retrieve-data', [Main_Controller::class,'retrieve']); 
 
 // insert data
 
-Route::post('/insert-data', [Main_Controller::class,'insert']);
+Route::post('/insert-data', [Main_Controller::class,'insert']); 
 
 // update data
 
 Route::put('/update-data/{id}', [Main_Controller::class,'update']);
 
+// search data
+
+Route::get('search-data/{id}', [Main_Controller::class,'search']);
+
 // delete data
 
 Route::delete('delete-data/{id}', [Main_Controller::class,'destroy']);
+
+
+
+
+
+
 
 
 

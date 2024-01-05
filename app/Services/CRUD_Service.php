@@ -30,6 +30,12 @@ class CRUD_Service
         return $this->crudRepository->update($validatedData, $id);
 
     }
+
+    public function search($id){
+
+        return $this->crudRepository->search($id);
+
+    }
     public function destroy($id){
 
         return $this->crudRepository->destroy($id);

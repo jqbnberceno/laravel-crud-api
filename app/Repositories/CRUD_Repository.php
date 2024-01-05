@@ -46,6 +46,11 @@ class CRUD_Repository implements CRUD_EloquentInterface, CRUD_Interface
         $model->update($data);
      }
 
+     public function search(int $id)
+     {
+        return $this->model->find($id);
+     }
+
      public function destroy(int $id)
      {
         return $this->model->find($id)->delete();
